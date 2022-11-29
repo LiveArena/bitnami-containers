@@ -1,0 +1,9 @@
+ARG REJSON_VERSION="latest"
+ARG BITNAMI_REDIS_VERSION="6.2-debian-11"
+
+FROM redislabs/rejson:${REJSON_VERSION} as rejson
+
+FROM bitnami/redis:${BITNAMI_REDIS_VERSION} as redis
+
+RUN mkdir -p /opt/bitnami/redis/modules/
+COPY --from=rejson /usr/lib/redis/modules/rejson.so /opt/bitnami/redis/modules/rejson.so
