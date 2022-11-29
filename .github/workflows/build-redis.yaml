@@ -74,7 +74,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./bitnami/redis/6.2/debian-11
-          file: Dockerfile.Rejson
+          file: ./bitnami/redis/6.2/debian-11/Dockerfile.Rejson
           platforms: linux/amd64
           push: ${{ env.PUSH_IMAGE }}
           tags: ${{ steps.docker_meta.outputs.tags }}
