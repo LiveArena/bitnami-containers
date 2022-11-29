@@ -2,6 +2,8 @@ name: Redis 6.2
 
 # Controls when the workflow will run
 on:
+  schedule:
+    - cron: '37 3 * * 1'
   workflow_dispatch:
     inputs:
       rejsonVersion:
@@ -26,10 +28,10 @@ permissions:
   packages: write
 
 env:
-  REJSON_VERSION: ${{ inputs.rejsonVersion }}
-  BITNAMI_REDIS_VERSION: ${{ inputs.bitnamiRedisVersion }}
+  REJSON_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.rejsonVersion || 'latest' }}
+  BITNAMI_REDIS_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.bitnamiRedisVersion || '6.2-debian-11' }}
   FQIN: "ghcr.io/${{ github.repository }}/redis"
-  PUSH_IMAGE: ${{ inputs.push }}
+  PUSH_IMAGE: ${{ github.event_name == 'workflow_dispatch' && inputs.push || true }}
 
 jobs:
   build:
