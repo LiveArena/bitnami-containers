@@ -30,8 +30,8 @@ permissions:
 env:
   REJSON_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.rejsonVersion || 'latest' }}
   BITNAMI_REDIS_VERSION: ${{ github.event_name == 'workflow_dispatch' && inputs.bitnamiRedisVersion || '6.2-debian-11' }}
-  FQIN: "ghcr.io/${{ github.repository }}/redis"
   PUSH_IMAGE: ${{ github.event_name == 'workflow_dispatch' && inputs.push || true }}
+  FQIN: "ghcr.io/${{ github.repository }}/redis"
 
 jobs:
   build:
