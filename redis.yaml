@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: redis
+  name: redis
+  namespace: redis
+spec:
+  containers:
+  - image: ghcr.io/livearena/bitnami-containers/redis:sha-f565513
+    name: redis
+    resources: {}
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
